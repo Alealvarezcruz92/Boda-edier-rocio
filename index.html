@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edier & Rocío — 12 de diciembre 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: #e8e0d0;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 32px 16px 48px;
+}
+
+/* ── Card ── */
+.card {
+  background: #fdfaf4;
+  max-width: 480px;
+  width: 100%;
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.13);
+}
+
+/* ── Geometric gold frame (SVG overlay) ── */
+.frame-svg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── Flower corners (SVG) ── */
+.flowers-top {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  pointer-events: none;
+  display: block;
+  margin-bottom: -20px;
+}
+
+.flowers-bottom {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  pointer-events: none;
+  display: block;
+  margin-top: -20px;
+}
+
+/* ── Content ── */
+.content {
+  position: relative;
+  z-index: 4;
+  text-align: center;
+  padding: 110px 48px 48px;
+}
+
+.eyebrow {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: #8b7355;
+  margin-bottom: 8px;
+}
+
+.names {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(48px, 12vw, 72px);
+  line-height: 1.15;
+  color: #c89840;
+  margin-bottom: 4px;
+}
+
+.names-and {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #8b7355;
+  display: block;
+  margin: 4px 0;
+}
+
+.divider-line {
+  width: 60px;
+  height: 0.5px;
+  background: #c89840;
+  margin: 18px auto;
+}
+
+.verse-block {
+  margin: 0 0 20px;
+}
+
+.verse-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 14px;
+  font-weight: 400;
+  color: #7a6440;
+  line-height: 1.8;
+}
+
+.verse-ref {
+  font-family: 'Lato', sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  color: #a08050;
+  margin-top: 6px;
+}
+
+.detail-row {
+  margin-bottom: 10px;
+}
+
+.detail-label {
+  font-family: 'Lato', sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #a08050;
+  margin-bottom: 3px;
+}
+
+.detail-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: #5c3d1e;
+  line-height: 1.3;
+}
+
+.detail-value.gold {
+  color: #c89840;
+  font-size: 22px;
+}
+
+.location-block {
+  background: rgba(200,152,64,0.08);
+  border: 0.5px solid rgba(200,152,64,0.3);
+  border-radius: 2px;
+  padding: 14px 20px;
+  margin: 18px 0;
+  text-align: center;
+}
+
+.location-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  font-weight: 500;
+  color: #5c3d1e;
+  margin-bottom: 3px;
+}
+
+.location-address {
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  color: #8b7355;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.map-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Lato', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #c89840;
+  text-decoration: none;
+  border: 0.5px solid #c89840;
+  padding: 8px 16px;
+  border-radius: 1px;
+  transition: background 0.2s, color 0.2s;
+}
+.map-btn:hover { background: #c89840; color: #fdfaf4; }
+
+/* ── Countdown ── */
+.countdown { margin: 18px 0 20px; }
+
+.countdown-label {
+  font-family: 'Lato', sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #a08050;
+  margin-bottom: 12px;
+}
+
+.countdown-grid {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.cd-unit { text-align: center; min-width: 44px; }
+
+.cd-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 400;
+  color: #5c3d1e;
+  line-height: 1;
+  display: block;
+}
+
+.cd-lbl {
+  font-family: 'Lato', sans-serif;
+  font-size: 9px;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #a08050;
+  margin-top: 4px;
+}
+
+.cd-sep {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  color: #c89840;
+  align-self: flex-start;
+  padding-top: 4px;
+}
+
+/* ── RSVP ── */
+.rsvp-block { margin-top: 20px; }
+
+.rsvp-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: #5c3d1e;
+  margin-bottom: 4px;
+}
+
+.rsvp-sub {
+  font-family: 'Lato', sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  color: #a08050;
+  margin-bottom: 4px;
+}
+
+.deadline-badge {
+  display: inline-block;
+  background: rgba(200,152,64,0.12);
+  color: #8b6520;
+  font-family: 'Lato', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  padding: 4px 12px;
+  border-radius: 1px;
+  margin-bottom: 20px;
+}
+
+.field-group { margin-bottom: 14px; text-align: left; }
+
+label {
+  display: block;
+  font-family: 'Lato', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #a08050;
+  margin-bottom: 6px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 12px 14px;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: #3a2a10;
+  background: #fff;
+  border: 0.5px solid #d4bf90;
+  border-radius: 1px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+input[type="text"]:focus { border-color: #c89840; }
+
+.radio-group {
+  display: flex;
+  border: 0.5px solid #d4bf90;
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.radio-opt { flex: 1; position: relative; }
+
+.radio-opt input[type="radio"] {
+  position: absolute; opacity: 0; width: 0; height: 0;
+}
+
+.radio-opt label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 6px;
+  cursor: pointer;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: #a08050;
+  background: #fff;
+  transition: background 0.15s, color 0.15s;
+  border-right: 0.5px solid #d4bf90;
+  text-transform: uppercase;
+  margin: 0;
+}
+.radio-opt:last-child label { border-right: none; }
+.radio-opt input[type="radio"]:checked + label {
+  background: #5c3d1e;
+  color: #fdfaf4;
+}
+
+.error-msg {
+  font-size: 11px;
+  color: #b04a20;
+  margin-top: 5px;
+  display: none;
+}
+.error-msg.visible { display: block; }
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: #5c3d1e;
+  color: #fdfaf4;
+  border: none;
+  border-radius: 1px;
+  font-family: 'Lato', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 18px;
+  transition: background 0.2s;
+}
+.submit-btn:hover { background: #c89840; }
+.submit-btn:active { transform: scale(0.99); }
+
+/* ── Success ── */
+.success-msg {
+  display: none;
+  text-align: center;
+  padding: 36px 20px;
+  background: rgba(200,152,64,0.08);
+  border: 0.5px solid rgba(200,152,64,0.3);
+  border-radius: 2px;
+}
+.success-msg.visible { display: block; }
+
+.success-check {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1px solid #c89840;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.success-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 32px;
+  color: #c89840;
+  margin-bottom: 8px;
+}
+
+.success-text {
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  color: #8b7355;
+  line-height: 1.8;
+}
+
+@media (max-width: 440px) {
+  .content { padding: 0 28px 28px; }
+  .names { font-size: 52px; }
+}
+</style>
+</head>
+<body>
+<div class="card">
+
+  <!-- Geometric gold frame -->
+  <svg class="frame-svg" viewBox="0 0 480 720" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <style>
+        .gf { fill:none; stroke:#c89840; stroke-width:1; opacity:0.7; }
+        .gf2 { fill:none; stroke:#c89840; stroke-width:0.5; opacity:0.4; }
+      </style>
+    </defs>
+    <!-- Outer geometric polygon frame -->
+    <polyline class="gf" points="60,40 420,40 460,100 460,620 420,680 60,680 20,620 20,100 60,40"/>
+    <!-- Inner frame offset -->
+    <polyline class="gf2" points="72,54 408,54 444,108 444,612 408,666 72,666 36,612 36,108 72,54"/>
+  </svg>
+
+  <!-- flowers removed -->
+  <svg class="flowers-top" viewBox="0 0 480 1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:none">
+    <!-- === LEFT CLUSTER === -->
+    <!-- Leaves left -->
+    <ellipse cx="52" cy="148" rx="28" ry="9" fill="#7a9a50" opacity="0.85" transform="rotate(-40 52 148)"/>
+    <ellipse cx="38" cy="130" rx="22" ry="7" fill="#98b86a" opacity="0.8" transform="rotate(-55 38 130)"/>
+    <ellipse cx="70" cy="160" rx="24" ry="8" fill="#5a8038" opacity="0.75" transform="rotate(-20 70 160)"/>
+    <ellipse cx="20" cy="112" rx="18" ry="6" fill="#6b9448" opacity="0.8" transform="rotate(-65 20 112)"/>
+    <ellipse cx="85" cy="140" rx="20" ry="6" fill="#8ab058" opacity="0.75" transform="rotate(-10 85 140)"/>
+    <!-- Eucalyptus sprigs left -->
+    <line x1="55" y1="170" x2="10" y2="80" stroke="#7a9a50" stroke-width="1.5" opacity="0.6"/>
+    <ellipse cx="18" cy="95" rx="9" ry="5" fill="#98b86a" opacity="0.7" transform="rotate(-50 18 95)"/>
+    <ellipse cx="28" cy="120" rx="8" ry="4.5" fill="#7a9a50" opacity="0.65" transform="rotate(-45 28 120)"/>
+    <ellipse cx="38" cy="142" rx="8" ry="4" fill="#98b86a" opacity="0.6" transform="rotate(-40 38 142)"/>
+    <!-- Large sunflower left (main) -->
+    <g transform="translate(78,108)">
+      <!-- petals back -->
+      <ellipse rx="30" ry="10" fill="#e8c040" transform="rotate(0)" opacity="0.9"/>
+      <ellipse rx="30" ry="10" fill="#d4a820" transform="rotate(20)" opacity="0.9"/>
+      <ellipse rx="30" ry="10" fill="#e8c040" transform="rotate(40)" opacity="0.9"/>
+      <ellipse rx="30" ry="10" fill="#d4a820" transform="rotate(60)" opacity="0.9"/>
+      <ellipse rx="30" ry="10" fill="#e8c040" transform="rotate(80)" opacity="0.9"/>
+      <ellipse rx="30" ry="10" fill="#d4a820" transform="rotate(100)" opacity="0.9"/>
+      <ellipse rx="30" ry="10" fill="#e8c040" transform="rotate(120)" opacity="0.9"/>
+      <ellipse rx="30" ry="10" fill="#d4a820" transform="rotate(140)" opacity="0.9"/>
+      <ellipse rx="30" ry="10" fill="#e8c040" transform="rotate(160)" opacity="0.9"/>
+      <!-- center -->
+      <circle r="19" fill="#6b3a10"/>
+      <circle r="14" fill="#4a2808"/>
+      <!-- texture dots -->
+      <circle cx="4" cy="-5" r="2" fill="#7a4818" opacity="0.7"/>
+      <circle cx="-5" cy="4" r="2" fill="#7a4818" opacity="0.7"/>
+      <circle cx="6" cy="6" r="1.5" fill="#8b5e2a" opacity="0.6"/>
+      <circle cx="-6" cy="-4" r="1.5" fill="#5a3010" opacity="0.6"/>
+      <circle cx="0" cy="7" r="1.5" fill="#7a4818" opacity="0.6"/>
+    </g>
+    <!-- Small sunflower left (side) -->
+    <g transform="translate(30,82)" opacity="0.88">
+      <ellipse rx="20" ry="7" fill="#e8c040" transform="rotate(15)"/>
+      <ellipse rx="20" ry="7" fill="#d4a820" transform="rotate(45)"/>
+      <ellipse rx="20" ry="7" fill="#e8c040" transform="rotate(75)"/>
+      <ellipse rx="20" ry="7" fill="#d4a820" transform="rotate(105)"/>
+      <ellipse rx="20" ry="7" fill="#e8c040" transform="rotate(135)"/>
+      <ellipse rx="20" ry="7" fill="#d4a820" transform="rotate(165)"/>
+      <circle r="13" fill="#6b3a10"/>
+      <circle r="9" fill="#4a2808"/>
+      <circle cx="2" cy="-3" r="1.2" fill="#7a4818" opacity="0.7"/>
+      <circle cx="-3" cy="3" r="1.2" fill="#7a4818" opacity="0.6"/>
+    </g>
+    <!-- Bud left -->
+    <g transform="translate(110,62)" opacity="0.75">
+      <ellipse rx="12" ry="5" fill="#e8c040" transform="rotate(20)"/>
+      <ellipse rx="12" ry="5" fill="#d4a820" transform="rotate(65)"/>
+      <ellipse rx="12" ry="5" fill="#e8c040" transform="rotate(110)"/>
+      <ellipse rx="12" ry="5" fill="#d4a820" transform="rotate(155)"/>
+      <circle r="8" fill="#6b3a10"/>
+      <circle r="5" fill="#4a2808"/>
+    </g>
+
+    <!-- === RIGHT CLUSTER === -->
+    <ellipse cx="428" cy="148" rx="28" ry="9" fill="#7a9a50" opacity="0.85" transform="rotate(40 428 148)"/>
+    <ellipse cx="442" cy="130" rx="22" ry="7" fill="#98b86a" opacity="0.8" transform="rotate(55 442 130)"/>
+    <ellipse cx="410" cy="160" rx="24" ry="8" fill="#5a8038" opacity="0.75" transform="rotate(20 410 160)"/>
+    <ellipse cx="460" cy="112" rx="18" ry="6" fill="#6b9448" opacity="0.8" transform="rotate(65 460 112)"/>
+    <ellipse cx="395" cy="140" rx="20" ry="6" fill="#8ab058" opacity="0.75" transform="rotate(10 395 140)"/>
+    <line x1="425" y1="170" x2="470" y2="80" stroke="#7a9a50" stroke-width="1.5" opacity="0.6"/>
+    <ellipse cx="462" cy="95" rx="9" ry="5" fill="#98b86a" opacity="0.7" transform="rotate(50 462 95)"/>
+    <ellipse cx="452" cy="120" rx="8" ry="4.5" fill="#7a9a50" opacity="0.65" transform="rotate(45 452 120)"/>
+    <ellipse cx="442" cy="142" rx="8" ry="4" fill="#98b86a" opacity="0.6" transform="rotate(40 442 142)"/>
+    <!-- Large sunflower right -->
+    <g transform="translate(402,108)">
+      <ellipse rx="30" ry="10" fill="#e8c040" transform="rotate(0)" opacity="0.9"/>
+      <ellipse rx="30" ry="10" fill="#d4a820" transform="rotate(20)" opacity="0.9"/>
+      <ellipse rx="30" ry="10" fill="#e8c040" transform="rotate(40)" opacity="0.9"/>
+      <ellipse rx="30" ry="10" fill="#d4a820" transform="rotate(60)" opacity="0.9"/>
+      <ellipse rx="30" ry="10" fill="#e8c040" transform="rotate(80)" opacity="0.9"/>
+      <ellipse rx="30" ry="10" fill="#d4a820" transform="rotate(100)" opacity="0.9"/>
+      <ellipse rx="30" ry="10" fill="#e8c040" transform="rotate(120)" opacity="0.9"/>
+      <ellipse rx="30" ry="10" fill="#d4a820" transform="rotate(140)" opacity="0.9"/>
+      <ellipse rx="30" ry="10" fill="#e8c040" transform="rotate(160)" opacity="0.9"/>
+      <circle r="19" fill="#6b3a10"/>
+      <circle r="14" fill="#4a2808"/>
+      <circle cx="-4" cy="-5" r="2" fill="#7a4818" opacity="0.7"/>
+      <circle cx="5" cy="4" r="2" fill="#7a4818" opacity="0.7"/>
+      <circle cx="-6" cy="6" r="1.5" fill="#8b5e2a" opacity="0.6"/>
+      <circle cx="6" cy="-4" r="1.5" fill="#5a3010" opacity="0.6"/>
+    </g>
+    <!-- Small sunflower right -->
+    <g transform="translate(450,82)" opacity="0.88">
+      <ellipse rx="20" ry="7" fill="#e8c040" transform="rotate(-15)"/>
+      <ellipse rx="20" ry="7" fill="#d4a820" transform="rotate(-45)"/>
+      <ellipse rx="20" ry="7" fill="#e8c040" transform="rotate(-75)"/>
+      <ellipse rx="20" ry="7" fill="#d4a820" transform="rotate(-105)"/>
+      <ellipse rx="20" ry="7" fill="#e8c040" transform="rotate(-135)"/>
+      <ellipse rx="20" ry="7" fill="#d4a820" transform="rotate(-165)"/>
+      <circle r="13" fill="#6b3a10"/>
+      <circle r="9" fill="#4a2808"/>
+    </g>
+    <!-- Bud right -->
+    <g transform="translate(370,62)" opacity="0.75">
+      <ellipse rx="12" ry="5" fill="#e8c040" transform="rotate(-20)"/>
+      <ellipse rx="12" ry="5" fill="#d4a820" transform="rotate(-65)"/>
+      <ellipse rx="12" ry="5" fill="#e8c040" transform="rotate(-110)"/>
+      <ellipse rx="12" ry="5" fill="#d4a820" transform="rotate(-155)"/>
+      <circle r="8" fill="#6b3a10"/>
+      <circle r="5" fill="#4a2808"/>
+    </g>
+  </svg>
+
+  <!-- MAIN CONTENT -->
+  <div class="content">
+    <p class="eyebrow">Nos complace invitarte a nuestra boda</p>
+
+    <div class="names">
+      Edier<br>
+      <span class="names-and">& </span>
+      Rocío
+    </div>
+
+    <div class="divider-line"></div>
+
+    <div class="verse-block">
+      <p class="verse-text">
+        "El amor es paciente, es bondadoso,<br>
+        todo lo sufre, todo lo cree,<br>
+        todo lo espera, todo lo soporta.<br>
+        El amor nunca deja de ser."
+      </p>
+      <p class="verse-ref">1 Corintios 13 : 4 – 8</p>
+    </div>
+
+    <div class="divider-line"></div>
+
+    <div class="detail-row" style="margin-top:16px">
+      <div class="detail-value gold">12 de diciembre, 2026</div>
+    </div>
+
+    <div class="detail-row" style="margin-top:8px">
+      <div class="detail-label">Ceremonia</div>
+      <div class="detail-value">12:00 PM</div>
+    </div>
+
+    <div class="location-block">
+      <div class="location-name">Finca La Roca</div>
+      <div class="location-address">
+        Vereda Quiuza<br>
+        Choachí, Cundinamarca, Colombia
+      </div>
+      <a class="map-btn" href="https://maps.google.com/maps?q=4.5680748%2C-73.9250443&z=17&hl=es" target="_blank">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+        Cómo llegar
+      </a>
+    </div>
+
+    <!-- Countdown -->
+    <div class="countdown">
+      <div class="countdown-label">Faltan</div>
+      <div class="countdown-grid">
+        <div class="cd-unit">
+          <span class="cd-num" id="cd-days">—</span>
+          <div class="cd-lbl">días</div>
+        </div>
+        <div class="cd-sep">·</div>
+        <div class="cd-unit">
+          <span class="cd-num" id="cd-hours">—</span>
+          <div class="cd-lbl">horas</div>
+        </div>
+        <div class="cd-sep">·</div>
+        <div class="cd-unit">
+          <span class="cd-num" id="cd-mins">—</span>
+          <div class="cd-lbl">min</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider-line"></div>
+
+    <!-- RSVP -->
+    <div class="rsvp-block">
+      <h2 class="rsvp-title">Confirma tu asistencia</h2>
+      <p class="rsvp-sub">Nos encantaría saber si nos acompañas</p>
+      <span class="deadline-badge">Antes del 27 de noviembre de 2026</span>
+
+      <div id="rsvp-form">
+        <div class="field-group">
+          <label for="nombre">Nombre completo</label>
+          <input type="text" id="nombre" placeholder="Tu nombre y apellido">
+          <div class="error-msg" id="err-nombre">Por favor escribe tu nombre.</div>
+        </div>
+
+        <div class="field-group">
+          <label>¿Asistirás?</label>
+          <div class="radio-group">
+            <div class="radio-opt">
+              <input type="radio" name="asistencia" id="si" value="Sí asisto">
+              <label for="si">Sí, con mucho gusto</label>
+            </div>
+            <div class="radio-opt">
+              <input type="radio" name="asistencia" id="no" value="No puedo asistir">
+              <label for="no">Lo siento, no podré</label>
+            </div>
+          </div>
+          <div class="error-msg" id="err-asi">Por favor indica si asistirás.</div>
+        </div>
+
+        <button class="submit-btn" onclick="enviar()">Confirmar</button>
+      </div>
+
+      <div class="success-msg" id="success">
+        <div class="success-check">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c89840" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <div class="success-title">¡Gracias!</div>
+        <p class="success-text">Tu respuesta fue recibida.<br>Edier y Rocío están muy emocionados<br>de contar contigo en este día.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- flowers removed -->
+  <svg class="flowers-bottom" viewBox="0 0 480 1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:none">
+    <!-- LEFT cluster bottom -->
+    <ellipse cx="55" cy="50" rx="26" ry="8" fill="#7a9a50" opacity="0.8" transform="rotate(35 55 50)"/>
+    <ellipse cx="35" cy="65" rx="22" ry="7" fill="#98b86a" opacity="0.75" transform="rotate(50 35 65)"/>
+    <ellipse cx="78" cy="42" rx="20" ry="6" fill="#5a8038" opacity="0.75" transform="rotate(20 78 42)"/>
+    <ellipse cx="18" cy="85" rx="18" ry="6" fill="#6b9448" opacity="0.7" transform="rotate(60 18 85)"/>
+    <line x1="50" y1="30" x2="8" y2="110" stroke="#7a9a50" stroke-width="1.5" opacity="0.55"/>
+    <ellipse cx="14" cy="95" rx="8" ry="4" fill="#98b86a" opacity="0.65" transform="rotate(50 14 95)"/>
+    <ellipse cx="24" cy="118" rx="8" ry="4" fill="#7a9a50" opacity="0.6" transform="rotate(45 24 118)"/>
+    <!-- Main sunflower bottom-left -->
+    <g transform="translate(82,72)">
+      <ellipse rx="28" ry="10" fill="#e8c040" transform="rotate(10)" opacity="0.9"/>
+      <ellipse rx="28" ry="10" fill="#d4a820" transform="rotate(40)" opacity="0.9"/>
+      <ellipse rx="28" ry="10" fill="#e8c040" transform="rotate(70)" opacity="0.9"/>
+      <ellipse rx="28" ry="10" fill="#d4a820" transform="rotate(100)" opacity="0.9"/>
+      <ellipse rx="28" ry="10" fill="#e8c040" transform="rotate(130)" opacity="0.9"/>
+      <ellipse rx="28" ry="10" fill="#d4a820" transform="rotate(160)" opacity="0.9"/>
+      <ellipse rx="28" ry="10" fill="#e8c040" transform="rotate(50)" opacity="0.85"/>
+      <ellipse rx="28" ry="10" fill="#d4a820" transform="rotate(80)" opacity="0.85"/>
+      <ellipse rx="28" ry="10" fill="#e8c040" transform="rotate(110)" opacity="0.85"/>
+      <circle r="18" fill="#6b3a10"/>
+      <circle r="13" fill="#4a2808"/>
+      <circle cx="3" cy="-4" r="1.8" fill="#7a4818" opacity="0.7"/>
+      <circle cx="-4" cy="3" r="1.8" fill="#7a4818" opacity="0.65"/>
+      <circle cx="5" cy="5" r="1.5" fill="#8b5e2a" opacity="0.6"/>
+    </g>
+    <!-- Side sunflower bottom-left -->
+    <g transform="translate(32,44)" opacity="0.85">
+      <ellipse rx="18" ry="7" fill="#e8c040" transform="rotate(0)"/>
+      <ellipse rx="18" ry="7" fill="#d4a820" transform="rotate(36)"/>
+      <ellipse rx="18" ry="7" fill="#e8c040" transform="rotate(72)"/>
+      <ellipse rx="18" ry="7" fill="#d4a820" transform="rotate(108)"/>
+      <ellipse rx="18" ry="7" fill="#e8c040" transform="rotate(144)"/>
+      <circle r="12" fill="#6b3a10"/>
+      <circle r="8" fill="#4a2808"/>
+    </g>
+
+    <!-- RIGHT cluster bottom -->
+    <ellipse cx="425" cy="50" rx="26" ry="8" fill="#7a9a50" opacity="0.8" transform="rotate(-35 425 50)"/>
+    <ellipse cx="445" cy="65" rx="22" ry="7" fill="#98b86a" opacity="0.75" transform="rotate(-50 445 65)"/>
+    <ellipse cx="402" cy="42" rx="20" ry="6" fill="#5a8038" opacity="0.75" transform="rotate(-20 402 42)"/>
+    <ellipse cx="462" cy="85" rx="18" ry="6" fill="#6b9448" opacity="0.7" transform="rotate(-60 462 85)"/>
+    <line x1="430" y1="30" x2="472" y2="110" stroke="#7a9a50" stroke-width="1.5" opacity="0.55"/>
+    <ellipse cx="466" cy="95" rx="8" ry="4" fill="#98b86a" opacity="0.65" transform="rotate(-50 466 95)"/>
+    <ellipse cx="456" cy="118" rx="8" ry="4" fill="#7a9a50" opacity="0.6" transform="rotate(-45 456 118)"/>
+    <!-- Main sunflower bottom-right -->
+    <g transform="translate(398,72)">
+      <ellipse rx="28" ry="10" fill="#e8c040" transform="rotate(-10)" opacity="0.9"/>
+      <ellipse rx="28" ry="10" fill="#d4a820" transform="rotate(-40)" opacity="0.9"/>
+      <ellipse rx="28" ry="10" fill="#e8c040" transform="rotate(-70)" opacity="0.9"/>
+      <ellipse rx="28" ry="10" fill="#d4a820" transform="rotate(-100)" opacity="0.9"/>
+      <ellipse rx="28" ry="10" fill="#e8c040" transform="rotate(-130)" opacity="0.9"/>
+      <ellipse rx="28" ry="10" fill="#d4a820" transform="rotate(-160)" opacity="0.9"/>
+      <ellipse rx="28" ry="10" fill="#e8c040" transform="rotate(-50)" opacity="0.85"/>
+      <ellipse rx="28" ry="10" fill="#d4a820" transform="rotate(-80)" opacity="0.85"/>
+      <ellipse rx="28" ry="10" fill="#e8c040" transform="rotate(-110)" opacity="0.85"/>
+      <circle r="18" fill="#6b3a10"/>
+      <circle r="13" fill="#4a2808"/>
+      <circle cx="-3" cy="-4" r="1.8" fill="#7a4818" opacity="0.7"/>
+      <circle cx="4" cy="3" r="1.8" fill="#7a4818" opacity="0.65"/>
+    </g>
+    <!-- Side sunflower bottom-right -->
+    <g transform="translate(448,44)" opacity="0.85">
+      <ellipse rx="18" ry="7" fill="#e8c040" transform="rotate(0)"/>
+      <ellipse rx="18" ry="7" fill="#d4a820" transform="rotate(-36)"/>
+      <ellipse rx="18" ry="7" fill="#e8c040" transform="rotate(-72)"/>
+      <ellipse rx="18" ry="7" fill="#d4a820" transform="rotate(-108)"/>
+      <ellipse rx="18" ry="7" fill="#e8c040" transform="rotate(-144)"/>
+      <circle r="12" fill="#6b3a10"/>
+      <circle r="8" fill="#4a2808"/>
+    </g>
+  </svg>
+
+</div><!-- end card -->
+
+<script>
+function updateCountdown() {
+  var w = new Date('2026-12-12T12:00:00');
+  var n = new Date();
+  var d = w - n;
+  if (d <= 0) {
+    ['cd-days','cd-hours','cd-mins'].forEach(function(id){ document.getElementById(id).textContent='0'; });
+    return;
+  }
+  document.getElementById('cd-days').textContent = Math.floor(d/86400000);
+  document.getElementById('cd-hours').textContent = Math.floor((d%86400000)/3600000);
+  document.getElementById('cd-mins').textContent = Math.floor((d%3600000)/60000);
+}
+updateCountdown();
+setInterval(updateCountdown, 60000);
+
+document.getElementById('nombre').addEventListener('input', function(){
+  document.getElementById('err-nombre').classList.remove('visible');
+});
+document.querySelectorAll('input[name="asistencia"]').forEach(function(r){
+  r.addEventListener('change', function(){
+    document.getElementById('err-asi').classList.remove('visible');
+  });
+});
+
+function enviar() {
+  var nombre = document.getElementById('nombre').value.trim();
+  var asi = document.querySelector('input[name="asistencia"]:checked');
+  var ok = true;
+  if (!nombre) { document.getElementById('err-nombre').classList.add('visible'); ok=false; }
+  if (!asi) { document.getElementById('err-asi').classList.add('visible'); ok=false; }
+  if (!ok) return;
+
+  /*
+  CONECTAR CON GOOGLE SHEETS:
+  1. Crea un Google Form con dos campos: Nombre + Asistencia
+  2. URL del form: cambia /viewform por /formResponse
+  3. Reemplaza GOOGLE_FORM_URL con esa URL
+  4. Reemplaza entry.CAMPO_NOMBRE y entry.CAMPO_ASI
+     con los entry.XXXXXXX reales del formulario
+  */
+  var FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScg8q_I6I5agZ2kKudYJm90TGmq7gpBCdnNeBXNRU5-Qk91IQ/formResponse';
+
+  var asiste = asi.value === 'Sí asisto';
+
+  var fd = new FormData();
+  fd.append('entry.1645349144', nombre);
+  fd.append('entry.1151902753', asi.value);
+  fetch(FORM_URL, { method:'POST', mode:'no-cors', body:fd })
+    .then(function(){ mostrarExito(asiste); })
+    .catch(function(){ mostrarExito(asiste); });
+}
+
+function mostrarExito(asiste) {
+  document.getElementById('rsvp-form').style.display = 'none';
+  var titulo = document.querySelector('.success-title');
+  var texto = document.querySelector('.success-text');
+  if (asiste) {
+    titulo.textContent = '¡Gracias!';
+    texto.innerHTML = 'Tu respuesta fue recibida.<br>Edier y Rocío están muy emocionados<br>de contar contigo en este día.';
+  } else {
+    titulo.textContent = '¡Gracias por avisarnos!';
+    texto.innerHTML = 'Lamentamos que no puedas acompañarnos,<br>pero te llevamos en el corazón<br>en este día tan especial.';
+  }
+  document.getElementById('success').classList.add('visible');
+}
+</script>
+
+<!--
+PASOS PARA PUBLICAR EN GITHUB PAGES:
+1. github.com → nueva cuenta (gratis) → New repository
+2. Nombre: boda-edier-rocio | Público | Create repository
+3. "uploading an existing file" → sube este archivo renombrado como index.html
+4. Settings → Pages → Branch: main → Save
+5. Link: https://TU-USUARIO.github.io/boda-edier-rocio/
+
+COMPARTIR POR WHATSAPP:
+"🌻 Edier & Rocío se casan
+12 de diciembre 2026 · 12:00 PM
+Finca La Roca, Vereda Quiuza, Choachí
+Confirma tu asistencia: [link]"
+-->
+</body>
+</html>
