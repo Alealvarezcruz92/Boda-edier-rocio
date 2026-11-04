@@ -791,9 +791,9 @@ function enviar() {
   var fd = new FormData();
   fd.append('entry.1645349144', nombre);
   fd.append('entry.1151902753', asi.value);
-  fd.append('entry.2023575312', llevaNinos);
-  fd.append('entry.904223635', cuantosNinos);
-  fd.append('entry.2024601112', acompanante);
+  fd.append('entry.2024601112', llevaNinos);
+  fd.append('entry.2023575312', cuantosNinos);
+  fd.append('entry.904223635', acompanante || '');
   fetch(FORM_URL, { method:'POST', mode:'no-cors', body:fd })
     .then(function(){ mostrarExito(asiste); })
     .catch(function(){ mostrarExito(asiste); });
