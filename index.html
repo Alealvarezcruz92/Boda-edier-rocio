@@ -602,6 +602,31 @@ input[type="text"]:focus { border-color: #3a5230; }
             </div>
             <div class="error-msg" id="err-asi">Por favor indica si asistirás.</div>
           </div>
+          <div class="field-group">
+            <label>¿Vas con niños?</label>
+            <div class="radio-group">
+              <div class="radio-opt">
+                <input type="radio" name="ninos" id="ninos-si" value="Sí" onchange="toggleNinos(true)">
+                <label for="ninos-si">Sí</label>
+              </div>
+              <div class="radio-opt">
+                <input type="radio" name="ninos" id="ninos-no" value="No" onchange="toggleNinos(false)">
+                <label for="ninos-no">No</label>
+              </div>
+            </div>
+            <div class="error-msg" id="err-ninos">Por favor indica si vas con niños.</div>
+          </div>
+
+          <div class="field-group" id="cuantos-ninos-group" style="display:none;">
+            <label for="cuantos-ninos">¿Cuántos niños?</label>
+            <input type="number" id="cuantos-ninos" min="1" max="10" placeholder="Número de niños" style="font-size:16px;width:100%;padding:13px 14px;border:0.5px solid #b8c8a0;border-radius:1px;background:#fff;color:#3a5230;font-family:Lato,sans-serif;outline:none;">
+          </div>
+
+          <div class="field-group">
+            <label for="acompanante">¿Vas acompañado? Escribe su nombre</label>
+            <input type="text" id="acompanante" placeholder="Nombre de tu acompañante (opcional)" autocomplete="off">
+          </div>
+
           <button class="submit-btn" onclick="enviar()">Confirmar</button>
         </div>
 
@@ -739,20 +764,36 @@ document.querySelectorAll('input[name="asistencia"]').forEach(function(r){
   });
 });
 
+function toggleNinos(show) {
+  document.getElementById('cuantos-ninos-group').style.display = show ? 'block' : 'none';
+  if (!show) document.getElementById('cuantos-ninos').value = '';
+  document.getElementById('err-ninos').classList.remove('visible');
+}
+
 function enviar() {
   var nombre = document.getElementById('nombre').value.trim();
   var asi = document.querySelector('input[name="asistencia"]:checked');
+  var ninos = document.querySelector('input[name="ninos"]:checked');
   var ok = true;
+
   if (!nombre) { document.getElementById('err-nombre').classList.add('visible'); ok=false; }
-  if (!asi) { document.getElementById('err-asi').classList.add('visible'); ok=false; }
+  if (!asi)    { document.getElementById('err-asi').classList.add('visible'); ok=false; }
+  if (!ninos)  { document.getElementById('err-ninos').classList.add('visible'); ok=false; }
   if (!ok) return;
 
   var asiste = asi.value === 'Sí asisto';
+  var llevaNinos = ninos.value;
+  var cuantosNinos = llevaNinos === 'Sí' ? (document.getElementById('cuantos-ninos').value || '0') : '0';
+  var acompanante = document.getElementById('acompanante').value.trim();
+
   var FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScg8q_I6I5agZ2kKudYJm90TGmq7gpBCdnNeBXNRU5-Qk91IQ/formResponse';
 
   var fd = new FormData();
   fd.append('entry.1645349144', nombre);
   fd.append('entry.1151902753', asi.value);
+  fd.append('entry.2023575312', llevaNinos);
+  fd.append('entry.904223635', cuantosNinos);
+  fd.append('entry.2024601112', acompanante);
   fetch(FORM_URL, { method:'POST', mode:'no-cors', body:fd })
     .then(function(){ mostrarExito(asiste); })
     .catch(function(){ mostrarExito(asiste); });
