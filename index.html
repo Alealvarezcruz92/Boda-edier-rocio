@@ -702,37 +702,7 @@ input[type="text"]:focus { border-color: #3a5230; }
 
       <p class="esperamos" style="margin-top:20px;">¡Los esperamos!</p>
 
-      <!-- Leaf divider -->
-      <svg class="leaf-divider" height="20" viewBox="0 0 140 20" aria-hidden="true">
-        <line x1="0" y1="10" x2="48" y2="10" stroke="#b8943a" stroke-width="0.7" opacity="0.6"/>
-        <ellipse cx="60" cy="10" rx="8" ry="4" fill="#5a7840" opacity="0.7" transform="rotate(-10 60 10)"/>
-        <ellipse cx="70" cy="10" rx="7" ry="3.5" fill="#7a9a58" opacity="0.65" transform="rotate(8 70 10)"/>
-        <circle cx="65" cy="10" r="2" fill="#b8943a" opacity="0.5"/>
-        <line x1="92" y1="10" x2="140" y2="10" stroke="#b8943a" stroke-width="0.7" opacity="0.6"/>
-      </svg>
 
-      <!-- Galería -->
-      <div class="galeria-section">
-        <p class="galeria-title">Nuestra historia</p>
-        <div class="carrusel" id="carrusel">
-          <div class="carrusel-track" id="carrusel-track">
-            <div class="carrusel-slide"><img src="https://alealvarezcruz92.github.io/Boda-edier-rocio/IMG_0002.jpg" alt="Foto 1" loading="lazy"></div>
-            <div class="carrusel-slide"><img src="https://alealvarezcruz92.github.io/Boda-edier-rocio/IMG_0066.jpg" alt="Foto 2" loading="lazy"></div>
-            <div class="carrusel-slide"><img src="https://alealvarezcruz92.github.io/Boda-edier-rocio/IMG_0097.jpg" alt="Foto 3" loading="lazy"></div>
-            <div class="carrusel-slide"><img src="https://alealvarezcruz92.github.io/Boda-edier-rocio/IMG_0101.jpg" alt="Foto 4" loading="lazy"></div>
-            <div class="carrusel-slide"><img src="https://alealvarezcruz92.github.io/Boda-edier-rocio/IMG_0108.jpg" alt="Foto 5" loading="lazy"></div>
-            <div class="carrusel-slide"><img src="https://alealvarezcruz92.github.io/Boda-edier-rocio/IMG_0127.jpg" alt="Foto 6" loading="lazy"></div>
-            <div class="carrusel-slide"><img src="https://alealvarezcruz92.github.io/Boda-edier-rocio/IMG_9986.jpg" alt="Foto 7" loading="lazy"></div>
-          </div>
-          <button class="carrusel-btn prev" onclick="moverCarrusel(-1)" aria-label="Anterior">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3a5230" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
-          <button class="carrusel-btn next" onclick="moverCarrusel(1)" aria-label="Siguiente">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3a5230" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
-        </div>
-        <div class="carrusel-dots" id="carrusel-dots"></div>
-      </div>
 
       <div class="footer">
         <div class="footer-names">Edier &amp; Ángela Rocío</div>
@@ -744,48 +714,6 @@ input[type="text"]:focus { border-color: #3a5230; }
 </div><!-- end card -->
 
 <script>
-// Carrusel
-var carruselIndex = 0;
-var carruselTotal = 7;
-
-function initCarrusel() {
-  var dots = document.getElementById('carrusel-dots');
-  for (var i = 0; i < carruselTotal; i++) {
-    var dot = document.createElement('button');
-    dot.className = 'carrusel-dot' + (i === 0 ? ' active' : '');
-    dot.setAttribute('aria-label', 'Foto ' + (i+1));
-    dot.setAttribute('data-index', i);
-    dot.addEventListener('click', function(){ irAFoto(parseInt(this.getAttribute('data-index'))); });
-    dots.appendChild(dot);
-  }
-  // Swipe táctil
-  var track = document.getElementById('carrusel');
-  var startX = 0;
-  track.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
-  track.addEventListener('touchend', function(e){
-    var diff = startX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) moverCarrusel(diff > 0 ? 1 : -1);
-  }, {passive:true});
-}
-
-function moverCarrusel(dir) {
-  carruselIndex = (carruselIndex + dir + carruselTotal) % carruselTotal;
-  actualizarCarrusel();
-}
-
-function irAFoto(index) {
-  carruselIndex = index;
-  actualizarCarrusel();
-}
-
-function actualizarCarrusel() {
-  document.getElementById('carrusel-track').style.transform = 'translateX(-' + (carruselIndex * 100) + '%)';
-  document.querySelectorAll('.carrusel-dot').forEach(function(dot, i){
-    dot.classList.toggle('active', i === carruselIndex);
-  });
-}
-
-initCarrusel();
 
 function updateCountdown() {
   var w = new Date('2026-12-12T12:00:00');
