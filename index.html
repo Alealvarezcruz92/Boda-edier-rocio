@@ -23,6 +23,10 @@ body {
 /* ── Card ── */
 .card {
   background: #f7f2e3;
+  background-image: url('https://alealvarezcruz92.github.io/Boda-edier-rocio/fondo.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
   width: 100%;
   max-width: 460px;
   position: relative;
@@ -132,6 +136,82 @@ body {
   width: 50%;
 }
 
+/* ── Galería carrusel ── */
+.galeria-section {
+  margin: 4px 0;
+}
+.galeria-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(16px, 4.5vw, 20px);
+  font-weight: 400;
+  font-style: italic;
+  color: #3a5230;
+  margin-bottom: 14px;
+}
+.carrusel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #e8e0cc;
+  aspect-ratio: 4/3;
+}
+.carrusel-track {
+  display: flex;
+  transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+  height: 100%;
+}
+.carrusel-slide {
+  min-width: 100%;
+  height: 100%;
+}
+.carrusel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.carrusel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(247,242,227,0.85);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  touch-action: manipulation;
+  transition: background 0.2s;
+}
+.carrusel-btn:hover, .carrusel-btn:active { background: rgba(247,242,227,1); }
+.carrusel-btn.prev { left: 10px; }
+.carrusel-btn.next { right: 10px; }
+.carrusel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+.carrusel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #b8c8a0;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.carrusel-dot.active {
+  background: #3a5230;
+  transform: scale(1.3);
+}
+
 /* ── Details block ── */
 .details-block {
   background: rgba(58,82,48,0.05);
@@ -187,13 +267,31 @@ body {
 }
 .map-link:hover, .map-link:active { background: #3a5230; color: #f7f2e3; }
 
-/* ── Ceremony & esperamos ── */
-.ceremony-note {
-  font-family: 'Great Vibes', cursive;
-  font-size: clamp(22px, 6vw, 30px);
-  color: #3a5230;
-  margin: 6px 0 4px;
+/* ── Lluvia de sobres ── */
+.sobres-block {
+  background: rgba(184,148,58,0.07);
+  border: 0.5px solid rgba(184,148,58,0.35);
+  border-radius: 2px;
+  padding: clamp(14px, 4vw, 20px);
+  margin: 4px 0 0;
+  text-align: center;
 }
+.sobres-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(16px, 4.5vw, 20px);
+  font-weight: 500;
+  color: #b8943a;
+  margin: 8px 0 6px;
+}
+.sobres-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(13px, 3.5vw, 15px);
+  color: #4a5c38;
+  line-height: 1.75;
+}
+
+/* ── Esperamos ── */
 .esperamos {
   font-family: 'Great Vibes', cursive;
   font-size: clamp(26px, 7.5vw, 36px);
@@ -448,9 +546,9 @@ input[type="text"]:focus { border-color: #3a5230; }
       </svg>
 
       <p class="intro-text">
-        Con la bendición de Dios y de nuestros padres,<br>
-        tenemos el gusto de invitarlos a la celebración<br>
-        de nuestro matrimonio.
+        Dos caminos que Dios unió en uno solo.<br>
+        Hoy queremos que seas parte<br>
+        de este nuevo comienzo.
       </p>
 
       <span class="name-primary">Edier Ruiz</span>
@@ -466,12 +564,14 @@ input[type="text"]:focus { border-color: #3a5230; }
         <line x1="92" y1="10" x2="140" y2="10" stroke="#b8943a" stroke-width="0.7" opacity="0.6"/>
       </svg>
 
+      <!-- Versículo -->
       <div class="verse-block">
         <p class="verse-text">
-          "Mejores son dos que uno;<br>
-          porque tienen mejor paga de su trabajo."
+          "Así que no son ya más dos, sino una sola carne;<br>
+          por tanto, lo que Dios juntó,<br>
+          no lo separe el hombre."
         </p>
-        <span class="verse-ref">Eclesiastés 4:9</span>
+        <span class="verse-ref">San Mateo 19:6</span>
       </div>
 
       <!-- Leaf divider -->
@@ -483,7 +583,7 @@ input[type="text"]:focus { border-color: #3a5230; }
         <line x1="92" y1="10" x2="140" y2="10" stroke="#b8943a" stroke-width="0.7" opacity="0.6"/>
       </svg>
 
-      <!-- Details -->
+      <!-- Details: fecha y hora discreta, lugar protagonista -->
       <div class="details-block">
         <div class="detail-row">
           <div class="detail-icon">
@@ -492,19 +592,7 @@ input[type="text"]:focus { border-color: #3a5230; }
             </svg>
           </div>
           <div>
-            <span class="detail-label">Fecha</span>
-            <span class="detail-value">Sábado, 12 de diciembre de 2026</span>
-          </div>
-        </div>
-        <div class="detail-row">
-          <div class="detail-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5a7840" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-            </svg>
-          </div>
-          <div>
-            <span class="detail-label">Ceremonia</span>
-            <span class="detail-value">12 del mediodía</span>
+            <span class="detail-label">Sábado, 12 de diciembre de 2026 · 12 del mediodía</span>
           </div>
         </div>
         <div class="detail-row">
@@ -526,7 +614,19 @@ input[type="text"]:focus { border-color: #3a5230; }
         </a>
       </div>
 
-      <p class="ceremony-note">Ceremonia y recepción cristiana</p>
+      <!-- Lluvia de sobres -->
+      <div class="sobres-block">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#b8943a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <polyline points="2,4 12,13 22,4"/>
+        </svg>
+        <p class="sobres-title">Lluvia de sobres</p>
+        <p class="sobres-text">
+          Tu presencia es nuestro mayor regalo.<br>
+          Si deseas obsequiarnos algo,<br>
+          un sobre será más que suficiente.
+        </p>
+      </div>
 
       <!-- Leaf divider -->
       <svg class="leaf-divider" height="20" viewBox="0 0 140 20" aria-hidden="true">
@@ -609,6 +709,38 @@ input[type="text"]:focus { border-color: #3a5230; }
 
       <p class="esperamos" style="margin-top:20px;">¡Los esperamos!</p>
 
+      <!-- Leaf divider -->
+      <svg class="leaf-divider" height="20" viewBox="0 0 140 20" aria-hidden="true">
+        <line x1="0" y1="10" x2="48" y2="10" stroke="#b8943a" stroke-width="0.7" opacity="0.6"/>
+        <ellipse cx="60" cy="10" rx="8" ry="4" fill="#5a7840" opacity="0.7" transform="rotate(-10 60 10)"/>
+        <ellipse cx="70" cy="10" rx="7" ry="3.5" fill="#7a9a58" opacity="0.65" transform="rotate(8 70 10)"/>
+        <circle cx="65" cy="10" r="2" fill="#b8943a" opacity="0.5"/>
+        <line x1="92" y1="10" x2="140" y2="10" stroke="#b8943a" stroke-width="0.7" opacity="0.6"/>
+      </svg>
+
+      <!-- Galería -->
+      <div class="galeria-section">
+        <p class="galeria-title">Nuestra historia</p>
+        <div class="carrusel" id="carrusel">
+          <div class="carrusel-track" id="carrusel-track">
+            <div class="carrusel-slide"><img src="https://alealvarezcruz92.github.io/Boda-edier-rocio/IMG_0002.jpg" alt="Foto 1" loading="lazy"></div>
+            <div class="carrusel-slide"><img src="https://alealvarezcruz92.github.io/Boda-edier-rocio/IMG_0066.jpg" alt="Foto 2" loading="lazy"></div>
+            <div class="carrusel-slide"><img src="https://alealvarezcruz92.github.io/Boda-edier-rocio/IMG_0097.jpg" alt="Foto 3" loading="lazy"></div>
+            <div class="carrusel-slide"><img src="https://alealvarezcruz92.github.io/Boda-edier-rocio/IMG_0101.jpg" alt="Foto 4" loading="lazy"></div>
+            <div class="carrusel-slide"><img src="https://alealvarezcruz92.github.io/Boda-edier-rocio/IMG_0108.jpg" alt="Foto 5" loading="lazy"></div>
+            <div class="carrusel-slide"><img src="https://alealvarezcruz92.github.io/Boda-edier-rocio/IMG_0127.jpg" alt="Foto 6" loading="lazy"></div>
+            <div class="carrusel-slide"><img src="https://alealvarezcruz92.github.io/Boda-edier-rocio/IMG_9986.jpg" alt="Foto 7" loading="lazy"></div>
+          </div>
+          <button class="carrusel-btn prev" onclick="moverCarrusel(-1)" aria-label="Anterior">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3a5230" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="carrusel-btn next" onclick="moverCarrusel(1)" aria-label="Siguiente">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3a5230" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+        <div class="carrusel-dots" id="carrusel-dots"></div>
+      </div>
+
       <div class="footer">
         <div class="footer-names">Edier &amp; Ángela Rocío</div>
         <div class="footer-date">12 · 12 · 2026 — Choachí, Cundinamarca</div>
@@ -619,6 +751,49 @@ input[type="text"]:focus { border-color: #3a5230; }
 </div><!-- end card -->
 
 <script>
+// Carrusel
+var carruselIndex = 0;
+var carruselTotal = 7;
+
+function initCarrusel() {
+  var dots = document.getElementById('carrusel-dots');
+  for (var i = 0; i < carruselTotal; i++) {
+    var dot = document.createElement('button');
+    dot.className = 'carrusel-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Foto ' + (i+1));
+    dot.setAttribute('data-index', i);
+    dot.addEventListener('click', function(){ irAFoto(parseInt(this.getAttribute('data-index'))); });
+    dots.appendChild(dot);
+  }
+  // Swipe táctil
+  var track = document.getElementById('carrusel');
+  var startX = 0;
+  track.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', function(e){
+    var diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) moverCarrusel(diff > 0 ? 1 : -1);
+  }, {passive:true});
+}
+
+function moverCarrusel(dir) {
+  carruselIndex = (carruselIndex + dir + carruselTotal) % carruselTotal;
+  actualizarCarrusel();
+}
+
+function irAFoto(index) {
+  carruselIndex = index;
+  actualizarCarrusel();
+}
+
+function actualizarCarrusel() {
+  document.getElementById('carrusel-track').style.transform = 'translateX(-' + (carruselIndex * 100) + '%)';
+  document.querySelectorAll('.carrusel-dot').forEach(function(dot, i){
+    dot.classList.toggle('active', i === carruselIndex);
+  });
+}
+
+initCarrusel();
+
 function updateCountdown() {
   var w = new Date('2026-12-12T12:00:00');
   var n = new Date();
