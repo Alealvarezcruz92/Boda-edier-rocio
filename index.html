@@ -284,6 +284,71 @@ body {
   line-height: 1.75;
 }
 
+/* ── Código de vestimenta ── */
+.vestimenta-block {
+  background: rgba(58,82,48,0.05);
+  border: 0.5px solid rgba(58,82,48,0.2);
+  border-radius: 2px;
+  padding: clamp(14px, 4vw, 20px);
+  margin: 4px 0;
+  text-align: center;
+}
+.vestimenta-title {
+  font-family: 'Lato', sans-serif;
+  font-size: clamp(9px, 2.5vw, 11px);
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #7a8c5a;
+  margin: 8px 0 4px;
+}
+.vestimenta-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(18px, 5vw, 22px);
+  font-weight: 500;
+  color: #3a5230;
+  margin-bottom: 10px;
+}
+.vestimenta-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(13px, 3.5vw, 15px);
+  color: #4a5c38;
+  line-height: 1.85;
+}
+.vestimenta-text strong {
+  font-weight: 600;
+  color: #3a5230;
+}
+.vestimenta-text em {
+  font-style: italic;
+  color: #7a8c5a;
+}
+.vestimenta-icons {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin: 14px 0 16px;
+}
+.vestimenta-icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.vestimenta-icon-label {
+  font-family: 'Lato', sans-serif;
+  font-size: clamp(10px, 2.5vw, 11px);
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: #7a8c5a;
+}
+.vestimenta-img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  filter: invert(28%) sepia(20%) saturate(600%) hue-rotate(80deg) brightness(60%);
+}
+
 /* ── Esperamos ── */
 .esperamos {
   font-family: 'Great Vibes', cursive;
@@ -692,6 +757,27 @@ input[type="text"]:focus { border-color: #3a5230; }
           Tu presencia es nuestro mayor regalo.<br>
           Si deseas obsequiarnos algo,<br>
           un sobre será más que suficiente.
+        </p>
+      </div>
+
+      <!-- Código de vestimenta -->
+      <div class="vestimenta-block">
+        <p class="vestimenta-title">Código de vestimenta</p>
+        <p class="vestimenta-label">Elegante campestre</p>
+        <div class="vestimenta-icons">
+          <div class="vestimenta-icon-item">
+            <img src="https://alealvarezcruz92.github.io/Boda-edier-rocio/vestido-de-novia.png" alt="Vestido elegante" class="vestimenta-img">
+            <span class="vestimenta-icon-label">Vestido elegante</span>
+          </div>
+          <div style="display:flex;align-items:center;font-family:'Great Vibes',cursive;color:#b8943a;font-size:28px;padding-bottom:20px;">&amp;</div>
+          <div class="vestimenta-icon-item">
+            <img src="https://alealvarezcruz92.github.io/Boda-edier-rocio/traje.png" alt="Traje con corbata" class="vestimenta-img">
+            <span class="vestimenta-icon-label">Traje con corbata</span>
+          </div>
+        </div>
+        <p class="vestimenta-text">
+          Es una boda de día en un entorno natural y campestre.<br>
+          <em>¡Te esperamos con tu mejor sonrisa!</em>
         </p>
       </div>
 
